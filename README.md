@@ -5,7 +5,7 @@ Deploying and testing different Kubernetes deployment strategies using GKE.
 
 ## Environment Setup
 
-![screenshotss](fig1.png)
+![screenshots](fig1.png)
 
 This screenshots shows the compute zone being configured and the required Google Cloud APIs being enabled for the project. Enabling Cloud Resource Manager, Container API, and Artifact Registry ensures the cluster can be created and container images can be stored. Setting the compute zone also makes sure all commands run in the correct region. Completing this step first prevents permission or deployment issues later in the lab. It confirms that the environment is properly initialized before building any services.
 
