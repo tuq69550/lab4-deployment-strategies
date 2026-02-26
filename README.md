@@ -160,3 +160,34 @@ Blue/Green deployment runs two environments at the same time. Traffic switches f
 A dark launch deploys a new version without exposing it to normal users. The new version runs in the background for testing while live traffic continues going to the stable version.
 
 ---
+
+## Reflection Questions
+
+### 1. When is a rolling deployment appropriate?
+
+A rolling deployment is good when the old and new versions can run at the same time without breaking anything. Kubernetes replaces pods little by little, so the app stays online while updates happen. I think this works best for smaller updates where you don’t expect major problems.
+
+---
+
+### 2. When would you choose a canary deployment instead of rolling?
+
+I would use a canary deployment when I want to test a new version with only a small group of users first. Most traffic still goes to the stable version, which makes it safer if something goes wrong. It’s helpful when you’re not 100% sure how the update will behave.
+
+---
+
+### 3. What problem does blue/green deployment solve?
+
+Blue/Green deployment helps avoid risk during releases because both versions exist at the same time. The new version can be fully ready before switching traffic. If something fails, you can quickly switch back to the old version, which makes it feel safer than updating everything at once.
+
+---
+
+### 4. What is the purpose of a dark launch?
+
+A dark launch lets a new version run in the background without normal users seeing it. This makes it easier to test things like performance or logs without affecting real traffic. It’s basically like testing in production but without exposing the feature yet.
+
+---
+
+### 5. How do these strategies support independent microservice deployment?
+
+These strategies make it easier to update one microservice without stopping the whole system. Instead of redeploying everything, you can control how traffic moves between versions. This makes updates safer and fits well with how microservices are supposed to work.
+
