@@ -7,13 +7,13 @@ Deploying and testing different Kubernetes deployment strategies using GKE.
 
 ![screenshot](screenshots/fig1.png)
 
-This screenshot shows the compute zone being configured and the required Google Cloud APIs being enabled for the project. Enabling Cloud Resource Manager, Container API, and Artifact Registry ensures the cluster can be created and container images can be stored. Setting the compute zone also makes sure all commands run in the correct region. Completing this step first prevents permission or deployment issues later in the lab. It confirms that the environment is properly initialized before building any services.
+This screenshot shows the compute zone being configured. Completing this step first prevents permission or deployment issues later in the lab. It confirms that the environment is properly initialized before building any services.
 
 ---
 
 ![screenshot](screenshots/fig2.png)
 
-The Kubernetes cluster was successfully created with three nodes running in the specified zone. The output shows the cluster status as RUNNING along with details such as machine type, node count, and Kubernetes version. This verifies that the infrastructure is ready to host the microservices. Creating multiple nodes allows deployments to be distributed across the cluster. This step confirms that the foundation for all later deployment strategies is working correctly.
+The Kubernetes cluster was successfully created with three nodes running in the specified zone. The output shows the cluster status as running. This verifies that the infrastructure is ready to host the microservices. Creating multiple nodes allows deployments to be distributed across the cluster. This step confirms that the foundation for all later deployment strategies is working correctly as it should be.
 
 ---
 
@@ -27,7 +27,7 @@ This screenshot shows navigating into the gke-microservices-manifests directory 
 
 ![screenshot](screenshots/fig4.png)
 
-Both the products and orders deployments were applied successfully using kubectl commands. The output shows services being created and pods transitioning into Running status. Initially some pods were still in ContainerCreating state, which is normal while images are pulled and containers start. The deployment then reached 3/3 replicas, confirming everything initialized correctly. This establishes a working baseline environment before testing updates.
+Both the products and orders deployments were applied successfully using kubectl commands. The output shows services being created and pods transitioning into Running status. Initially some pods were still in ContainerCreating state, which is normal while images are pulled and containers start. The deployment then reached 3/3 replicas, confirming everything initialized correctly. This establishes a working environment before testing updates.
 
 ---
 
@@ -35,7 +35,7 @@ Both the products and orders deployments were applied successfully using kubectl
 
 ![screenshot](screenshots/fig5.png)
 
-The server.js file was modified to include a new `/version` endpoint. This endpoint returns a JSON response showing the version number, which helps identify which deployment is serving requests. Adding this functionality allows verification during rolling updates, canary releases, and blue-green deployments. The screenshot shows the updated code appended to the file. This step is important because it creates a visible difference between v1 and v2 behavior.
+The server.js file was modified to include a new /version endpoint. This endpoint returns a JSON response showing the version number, which helps identify which deployment is serving requests. Adding this functionality allows verification during rolling updates, canary releases, and blue-green deployments. The screenshot shows the updated code appended to the file. This step is important because it creates a visible difference between v1 and v2 behavior.
 
 ---
 
@@ -55,7 +55,7 @@ The deployment image was updated to orders:v2 and the rollout process was paused
 
 ![screenshot](screenshots/fig8.png)
 
-Requests were sent to the `/version` endpoint using the http-client pod. The responses returned version v2 with HTTP 200 status codes, confirming that traffic was routed to the updated pods. Testing from inside the cluster verifies internal service communication. Multiple requests were executed to confirm consistency. This step validates that the rolling update successfully deployed the new version.
+Requests were sent to the /version endpoint using the http-client pod. The responses returned version v2 with HTTP 200 status codes, confirming that traffic was routed to the updated pods. Testing from inside the cluster verifies internal service communication. Multiple requests were executed to confirm consistency. This step validates that the rolling update successfully deployed the new version.
 
 ---
 
@@ -101,7 +101,7 @@ The canary deployment was deleted after testing was completed. The canary pod en
 
 ![screenshot](screenshots/fig15.png)
 
-The orders deployment was labeled with `track=blue` and restarted to create the stable environment. Labeling pods allows the service selector to switch between blue and green deployments later. The rollout process replaced existing pods with labeled ones. This establishes the original version as the blue environment. Preparing labels is necessary before performing a blue-green switch.
+The orders deployment was labeled with track=blue and restarted to create the stable environment. Labeling pods allows the service selector to switch between blue and green deployments later. The rollout process replaced existing pods with labeled ones. This establishes the original version as the blue environment. Preparing labels is necessary before performing a blue-green switch.
 
 ---
 
@@ -119,7 +119,7 @@ The green deployment was created using version v2 while the blue deployment cont
 
 ![screenshot](screenshots/fig18.png)
 
-The service selector was patched to `track=green`, shifting traffic from blue to green pods. After the change, all requests returned version v2 responses with HTTP 200 status codes. This confirms the blue-green cutover was successful. Switching selectors instead of redeploying pods allows near-instant transitions. This step demonstrates how blue-green deployments minimize downtime during upgrades.
+The service selector was patched to track=green, shifting traffic from blue to green pods. After the change, all requests returned version v2 responses with HTTP 200 status codes. This confirms the blue-green cutover was successful. Switching selectors instead of redeploying pods allows near-instant transitions. This step demonstrates how blue-green deployments minimize downtime during upgrades.
 
 ---
 
