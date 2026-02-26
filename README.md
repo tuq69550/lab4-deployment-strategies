@@ -126,3 +126,37 @@ The service selector was patched to `track=green`, shifting traffic from blue to
 ![screenshot](screenshots/fig19.png)
 
 The Kubernetes cluster was deleted as part of the cleanup process. Removing cluster resources prevents unnecessary cloud usage and cost. The output confirms the deletion process completed successfully. Cleaning up infrastructure is an important final step after completing deployments. This marks the end of the lab environment.
+
+---
+
+## Deployment Strategy Diagrams
+
+These diagrams show different Kubernetes deployment strategies and how traffic moves between versions during updates.
+
+### Rolling Deployment
+![Rolling Deployment](diagrams/rolling.png)
+
+A rolling deployment gradually replaces old pods with new ones. The update happens step by step so the application stays available while new versions are introduced.
+
+---
+
+### Canary Deployment
+![Canary Deployment](diagrams/canary.png)
+
+A canary deployment releases a new version to a small number of users first. Most traffic still goes to the stable version while the new version is tested for issues.
+
+---
+
+### Blue/Green Deployment
+![Blue Green Deployment](diagrams/blue_green.png)
+
+Blue/Green deployment runs two environments at the same time. Traffic switches from the old version (blue) to the new version (green) once the new version is ready.
+
+---
+
+### Dark Launch
+![Dark Launch](diagrams/dark_launch.png)
+
+A dark launch deploys a new version without exposing it to normal users. The new version runs in the background for testing while live traffic continues going to the stable version.
+
+---
