@@ -125,7 +125,7 @@ The service selector was patched to track=green, shifting traffic from blue to g
 
 ![screenshot](screenshots/fig19.png)
 
-The Kubernetes cluster was deleted as part of the cleanup process. Removing cluster resources prevents unnecessary cloud usage and cost. The output confirms the deletion process completed successfully. Cleaning up infrastructure is an important final step after completing deployments. This marks the end of the lab environment.
+The Kubernetes cluster was deleted as part of the cleanup process. The output confirms the deletion process completed successfully. 
 
 ---
 
